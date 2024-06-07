@@ -18,23 +18,23 @@ fun main(){
         print("연산 번호를 입력하세요 : ")
         var calculation = readLine()!!
 
-        var _plus = AddOperation(number1,number2)
-        var _minus = SubstractOperation(number1,number2)
-        var _multiple = MultiplyOperation(number1, number2)
-        var _division = DivideOperation(number1, number2)
+        var _plus = AddOperation()
+        var _minus = SubstractOperation()
+        var _multiple = MultiplyOperation()
+        var _division = DivideOperation()
 
         when{
             calculation == "1" -> {
-                println("number1 + number2 = ${_plus.plus(number1, number2)}")
+                println("number1 + number2 = ${_plus.operation(number1, number2)}")
             }
             calculation == "2" -> {
-                println("number1 - number2 = ${_minus.minus(number1,number2)}")
+                println("number1 - number2 = ${_minus.operation(number1,number2)}")
             }
             calculation == "3" -> {
-                println("number1 * number2 = ${_multiple.multiple(number1,number2)}")
+                println("number1 * number2 = ${_multiple.operation(number1,number2)}")
             }
             calculation == "4" -> {
-                println("number1 / number2 = ${_division.division(number1,number2)}")
+                println("number1 / number2 = ${_division.operation(number1,number2)}")
             }
 
         }
@@ -42,28 +42,34 @@ fun main(){
     }
 }
 
-open class Calculator2(num1: Int, num2: Int)
 
-class AddOperation(num1: Int, num2: Int) : Calculator2(num1, num2) {
-    fun plus(num1: Int, num2: Int): Int {
-        return num1 + num2
+
+open class Calculator(){
+    open fun operation(num1:Int, num2:Int): Int{
+        return num1
     }
 }
 
-class SubstractOperation(num1: Int, num2: Int) : Calculator2(num1, num2) {
-    fun minus(num1: Int, num2: Int): Int {
+class AddOperation() : Calculator() {
+    override fun operation(num1: Int, num2: Int): Int {
+        return num1+num2
+    }
+}
+
+class SubstractOperation() : Calculator() {
+    override fun operation(num1: Int, num2: Int): Int {
         return num1 - num2
     }
 }
 
-class MultiplyOperation(num1: Int, num2: Int) : Calculator2(num1, num2) {
-    fun multiple(num1: Int, num2: Int): Int {
+class MultiplyOperation() : Calculator() {
+    override fun operation(num1: Int, num2: Int): Int {
         return num1 * num2
     }
 }
 
-class DivideOperation(num1: Int, num2: Int) : Calculator2(num1, num2) {
-    fun division(num1: Int, num2: Int): Int {
+class DivideOperation() : Calculator() {
+    override fun operation(num1: Int, num2: Int): Int {
         return num1 / num2
     }
 }
